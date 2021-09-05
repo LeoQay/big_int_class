@@ -9,67 +9,70 @@
 
 using namespace std;
 
+typedef long long type_int;
+
 class num
-{
-private:
-    vector <int> vec;  // число хранится в перевернутом виде, начиная с младших разрядов
-    bool is_minus;         // false - positive, true - negative
-    int degree = 3;
-    int power = 1000;
+        {
+        private:
+            vector <type_int> vec;  // число хранится в перевернутом виде, начиная с младших разрядов
+            bool is_minus;         // false - positive, true - negative
+            type_int degree = 9;
+            type_int power = 1000000000;
 
-    long size();
+            long size();
 
-    void push_back(int value);
+            void push_back(type_int value);
 
-    void pop_back();
+            void pop_back();
 
-    int& operator[] (long index);
+            type_int& operator[] (type_int index);
 
-    num add (num & operand1, num & operand2);
+            num add (num & operand1, num & operand2);
 
-    num sub (num & operand1, num & operand2);
+            num sub (num & operand1, num & operand2);
 
-    num mul_on_int (int operand);
+            num mul_on_int (type_int operand);
 
-    num mul_on_num (num & operand);
+            num mul_on_num (num & operand);
 
-    bool large (num & operand1, num & operand2);
+            bool large (num & operand1, num & operand2);
 
-    bool equal (num & operand1, num & operand2);
+            bool equal (num & operand1, num & operand2);
 
-    void eraser ();
+            void eraser ();
 
-public:
-    num();
+        public:
+            num();
 
-    num(string value);
+            num(string value);
 
-    explicit num (long long value);
+            explicit num (type_int value);
 
-    num operator+ (num & operand);
+            num operator+ (num & operand);
 
-    num operator- (num & operand);
+            num operator- (num & operand);
 
-    num operator* (num & operand);
+            num operator* (num & operand);
 
-    num operator/ (num & operand);
+            num operator/ (num & operand);
 
-    num operator% (num & operand);
+            num operator% (num & operand);
 
-    bool operator> (num & operand);
+            bool operator> (num & operand);
 
-    bool operator< (num & operand);
+            bool operator< (num & operand);
 
-    bool operator== (num & operand);
+            bool operator== (num & operand);
 
-    bool operator>= (num & operand);
+            bool operator>= (num & operand);
 
-    bool operator<= (num & operand);
+            bool operator<= (num & operand);
 
-    bool operator!= (num & operand);
+            bool operator!= (num & operand);
 
-    void print ();
-};
+            void print ();
+        };
+
 
 
 #endif //HAH_NUM_H

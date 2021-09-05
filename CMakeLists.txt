@@ -3,4 +3,4 @@ project(hah)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(hah main.cpp)
+add_executable(hah main.cpp num.cpp num.h)

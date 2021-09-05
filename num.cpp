@@ -11,7 +11,7 @@ using namespace std;
 
 void num::eraser()
 {
-    int k = this->vec.size();
+    type_int k = this->vec.size();
 
     while (k > 1 and (*this)[k - 1] == 0)
     {
@@ -27,7 +27,7 @@ long num::size()
 }
 
 
-void num::push_back(int value)
+void num::push_back(type_int value)
 {
     vec.push_back(value);
 }
@@ -39,7 +39,7 @@ void num::pop_back()
 }
 
 
-int& num::operator[] (long index)
+type_int& num::operator[] (type_int index)
 {
     return vec[index];
 }
@@ -53,7 +53,7 @@ bool num::large(num &operand1, num & operand2)
     for (long i = operand1.size() - 1; i >= 0; i--)
         if (operand1[i] > operand2[i]) return true;
 
-    return false;
+        return false;
 }
 
 
@@ -64,27 +64,27 @@ bool num::equal(num &operand1, num &operand2)
     for (long i = operand1.size() - 1; i >= 0; i--)
         if (operand1[i] != operand2[i]) return false;
 
-    return true;
+        return true;
 }
 
 
 num num::add (num & operand1, num & operand2)
 {
-    long n = operand1.size() > operand2.size() ? operand1.size() : operand2.size();
+    type_int n = operand1.size() > operand2.size() ? operand1.size() : operand2.size();
 
-    long s1 = operand1.size();
-    long s2 = operand2.size();
+    type_int s1 = operand1.size();
+    type_int s2 = operand2.size();
 
-    for (int i = 0; i < n - s1; i++) operand1.push_back(0);
-    for (int i = 0; i < n - s2; i++) operand2.push_back(0);
+    for (type_int i = 0; i < n - s1; i++) operand1.push_back(0);
+    for (type_int i = 0; i < n - s2; i++) operand2.push_back(0);
 
     num result = operand1;
 
-    int ost = 0;
+    type_int ost = 0;
 
     for (long i = 0; i < n; i++)
     {
-        int value = result[i] + operand2[i] + ost;
+        type_int value = result[i] + operand2[i] + ost;
         result[i] = value % power;
         ost       = value / power;
     }
@@ -97,19 +97,19 @@ num num::add (num & operand1, num & operand2)
 /// предполагется, что |operand1| >= |operand2|
 num num::sub (num & operand1, num & operand2)
 {
-    long n = operand1.size();
-    long s2 = operand2.size();
+    type_int n = operand1.size();
+    type_int s2 = operand2.size();
 
     for (long i = 0; i < n - s2; i++) operand2.push_back(0);
 
     num result = operand1;
 
-    for (long i = 0; i < n; i++)
+    for (type_int i = 0; i < n; i++)
     {
         if (result[i] < operand2[i])
         {
             result[i] += power;
-            long j = i + 1;
+            type_int j = i + 1;
             while (result[j] == 0)
             {
                 result[j] += power - 1;
@@ -127,18 +127,18 @@ num num::sub (num & operand1, num & operand2)
 }
 
 
-num num::mul_on_int(int operand)
+num num::mul_on_int(type_int operand)
 {
     num result;
     result.vec.clear();
 
     long size = (*this).vec.size();
 
-    int ostatok = 0;
+    type_int ostatok = 0;
 
     for (long i = 0; i < size; i++)
     {
-        int value = (*this).vec[i] * operand + ostatok;
+        type_int value = (*this).vec[i] * operand + ostatok;
 
         result.push_back(value % power);
 
@@ -174,13 +174,13 @@ num num::mul_on_num(num & operand)
         operand2 = this;
     }
 
-    long size = operand2->size();
+    type_int size = operand2->size();
 
-    for (long i = 0; i < size; i++)
+    for (type_int i = 0; i < size; i++)
     {
         num buffer = operand1->mul_on_int((*operand2)[i]);
 
-        for (long j = 0; j < i; j++)
+        for (type_int j = 0; j < i; j++)
             buffer = buffer.mul_on_int(power);
 
         result = result + buffer;
@@ -290,18 +290,18 @@ num::num(string value)
         is_minus = false;
 
 
-    long size = value.length();
+    type_int size = value.length();
 
-    for(long i = 0; i < (degree - size % degree) % degree; i++)
+    for(type_int i = 0; i < (degree - size % degree) % degree; i++)
         value =  '0' + value;
 
     while(value != "")
     {
-        int buffer = 0;
+        type_int buffer = 0;
 
-        long size_now = value.length();
+        type_int size_now = value.length();
 
-        for (long i = size_now - degree; i < size_now; i++)
+        for (type_int i = size_now - degree; i < size_now; i++)
             buffer = buffer * 10 + (value[i] - '0');
 
         vec.push_back(buffer);
@@ -311,7 +311,7 @@ num::num(string value)
 }
 
 
-num::num(long long value)
+num::num(type_int value)
 {
     is_minus = value < 0;
 
@@ -328,18 +328,18 @@ void num::print()
 {
     if (is_minus) cout << "-";
 
-    for (long i = vec.size() - 1; i >= 0; i--)
+    for (type_int i = vec.size() - 1; i >= 0; i--)
     {
         if (i != vec.size() - 1)
         {
-            int kol;
+            type_int kol;
 
             if (vec[i] == 0)
                 kol = degree - 1;
             else
                 kol = degree - floor(log(vec[i]) / log(10)) - 1;
 
-            for (int j = 0; j < kol; j++)
+            for (type_int j = 0; j < kol; j++)
                 cout << "0";
         }
 
