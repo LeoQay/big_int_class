@@ -132,13 +132,13 @@ num num::mul_on_int(type_int operand)
     num result;
     result.vec.clear();
 
-    long size = (*this).vec.size();
+    long size = this->vec.size();
 
     type_int ostatok = 0;
 
     for (long i = 0; i < size; i++)
     {
-        type_int value = (*this).vec[i] * operand + ostatok;
+        type_int value = this->vec[i] * operand + ostatok;
 
         result.push_back(value % power);
 
@@ -152,8 +152,15 @@ num num::mul_on_int(type_int operand)
     }
 
     result.eraser();
-
     return result;
+}
+
+
+num num::div_on_int(type_int val)
+{
+    num result;
+
+
 }
 
 

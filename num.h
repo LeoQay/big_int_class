@@ -35,6 +35,8 @@ class num
 
             num mul_on_num (num & operand);
 
+            num div_on_int(type_int val);
+
             bool large (num & operand1, num & operand2);
 
             bool equal (num & operand1, num & operand2);
